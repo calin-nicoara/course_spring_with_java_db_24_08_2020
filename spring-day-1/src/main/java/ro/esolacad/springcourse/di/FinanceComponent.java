@@ -22,7 +22,7 @@ public class FinanceComponent {
     private final FinanceFileWriter csvFileWriter;
     private BigDecimal randomValue;
 
-    @Autowired
+//    @Autowired
     public FinanceComponent(final TaxCalculatorComponent taxCalculatorComponent,
                             final FinanceFileWriter financeFileWriter) {
         this.taxCalculatorComponent = taxCalculatorComponent;

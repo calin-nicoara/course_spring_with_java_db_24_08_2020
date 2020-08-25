@@ -1,5 +1,6 @@
 package ro.esolacad.springcourse.di;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -45,6 +46,7 @@ public class BeanTests {
     }
 
     @Test
+    @Disabled
     public void taxCalculatorTestScope() {
         TaxCalculator taxCalculator = applicationContext.getBean(TaxCalculator.class);
 
