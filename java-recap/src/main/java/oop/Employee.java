@@ -9,7 +9,7 @@ public class Employee implements Payable, Taxable{
     private String name;
     private String title;
     private BigDecimal salary;
-    protected String protectedVariable;
+    public String protectedVariable;
 
     public Employee(String name, String title, BigDecimal salary) {
         this.name = name;

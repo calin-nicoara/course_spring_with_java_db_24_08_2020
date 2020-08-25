@@ -2,6 +2,10 @@ package oop;
 
 import java.math.BigDecimal;
 
+//@Deprecated
+/**
+ * It will replaced with ManagerEmployee
+ */
 public class ExecutiveEmployee extends Employee{
 
     private BigDecimal executiveBonus;
@@ -22,7 +26,7 @@ public class ExecutiveEmployee extends Employee{
         this.executiveBonus = executiveBonus;
     }
 
-    @Override
+//    @Override
     public String getTitle() {
         return "Executive " + super.getTitle();
     }
