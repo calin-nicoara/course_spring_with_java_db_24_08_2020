@@ -1,6 +1,7 @@
 package ro.esolacad.springcourse.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -17,6 +18,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByNameLike(String likeName);
 
     Optional<Product> findByPriceLessThan(@Param("price") BigDecimal price);
+
+//    @Modifying
+//    void deleteByName(String name);
 
 //    List<Product> findByNameLikeAndPriceGreaterThanEqual
 }

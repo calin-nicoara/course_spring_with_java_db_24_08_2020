@@ -35,9 +35,10 @@ public class JpaRelationsTest {
 
         ProductWithCategory savedProduct = productWithCategoryRepository.save(product);
 
-
         Optional<ProductWithCategory> productWithCategory = productWithCategoryRepository.findById(savedProduct.getId());
 
         System.out.println(productWithCategory.get().getCategory());
     }
+
+
 }

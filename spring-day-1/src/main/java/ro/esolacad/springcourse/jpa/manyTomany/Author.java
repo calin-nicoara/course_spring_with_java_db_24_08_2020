@@ -1,6 +1,4 @@
-package ro.esolacad.springcourse.jpa;
-
-import java.math.BigDecimal;
+package ro.esolacad.springcourse.jpa.manyTomany;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,11 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Product {
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private BigDecimal price;
 }

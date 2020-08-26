@@ -1,0 +1,6 @@
+package ro.esolacad.springcourse.jpa.manyTomany;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
+}

@@ -1,13 +1,13 @@
 package ro.esolacad.springcourse.jpa.manyToOne;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.Set;
+
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ro.esolacad.springcourse.jpa.Product;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +20,8 @@ public class Category {
     private Long id;
     private String name;
     private Boolean active;
+
+//    @OneToMany
+//    @JoinColumn(name = "category_id")
+//    private Set<Product> productSet;
 }
