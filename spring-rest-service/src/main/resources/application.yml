@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        bindings:
+          productStockChannel:
+            consumer:
+              ackEachRecord: true
+      default:
+        group: 'sc2-rest-service'
+      bindings:
+        productStockChannel:
+          destination: SC2_PRODUCT_STOCK
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring_24_08_2020_rest
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+feign:
+  hystrix:
+    enabled: true

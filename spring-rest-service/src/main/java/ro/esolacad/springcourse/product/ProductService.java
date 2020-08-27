@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import ro.esolacad.springcourse.GenericListModel;
 import ro.esolacad.springcourse.NotFoundException;
+import ro.esolacad.springcourse.product.productstock.ProductStockModel;
+import ro.esolacad.springcourse.product.productstock.ProductStockService;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +24,7 @@ import ro.esolacad.springcourse.NotFoundException;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductStockService productStockService;
 
     @Transactional(readOnly = true)
     public GenericListModel<ProductModel> findAllProductsOld(final Integer pageSize, final Integer pageNumber) {
@@ -88,10 +91,27 @@ public class ProductService {
 
     public void saveProduct(final ProductModel productModel) {
         Product product = ProductMapper.toProduct(productModel);
+
         productRepository.save(product);
     }
 
     public void deleteProduct(final Long productId) {
         productRepository.deleteById(productId);
+    }
+
+    public ProductWithStockModel findByIdWithStock(final Long productId) {
+        return productRepository.findById(productId)
+                .map(product -> {
+                    ProductStockModel stockByProductId = productStockService.findStockByProductIdWithFeign(product.getId());
+
+                    return ProductWithStockModel.builder()
+                            .id(product.getId())
+                            .name(product.getName())
+                            .price(product.getPrice())
+                            .status(product.getStatus())
+                            .stock(stockByProductId.getStock())
+                            .build();
+                })
+                .orElseThrow(() -> new NotFoundException("Product with id:" + productId + " not found"));
     }
 }

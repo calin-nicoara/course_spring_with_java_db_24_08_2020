@@ -1,6 +1,7 @@
 package ro.esolacad.springcourse.product;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,9 @@ import ro.esolacad.springcourse.GenericListModel;
 
 //@Controller
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:4200")
 public class ProductResource {
 
     private final ProductService productService;
@@ -50,6 +52,13 @@ public class ProductResource {
                 .map(productModel -> ResponseEntity.ok(productModel))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+//
+//    @GetMapping("/{productId2}")
+//    public ResponseEntity<ProductModel> findById2(@PathVariable Long productId) {
+//        return productService.findById(productId)
+//                .map(productModel -> ResponseEntity.ok(productModel))
+//                .orElseGet(() -> ResponseEntity.notFound().build());
+//    }
 
     @GetMapping("/v2/{productId}")
     public ResponseEntity<ProductModel> findByIdThrowNotFound(@PathVariable Long productId) {
@@ -57,6 +66,7 @@ public class ProductResource {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('READER', 'WRITER')")
     public ResponseEntity<?> saveProduct(@RequestBody @Valid ProductModel productModel,
                                          BindingResult bindingResult) {
 
@@ -91,5 +101,13 @@ public class ProductResource {
     public void firstError() {
         throw new RuntimeException("Hello there!");
     }
+
+    @GetMapping("/withstock/{productId}")
+    public ResponseEntity<ProductWithStockModel> findByProductIdWithStock(
+            @PathVariable Long productId
+    ) {
+        return ResponseEntity.ok(productService.findByIdWithStock(productId));
+    }
+
 
 }

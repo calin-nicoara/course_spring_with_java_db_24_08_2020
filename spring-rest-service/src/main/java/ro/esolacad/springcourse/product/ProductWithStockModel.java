@@ -2,6 +2,8 @@ package ro.esolacad.springcourse.product;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotBlank;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductFilterModel {
-
-    private Integer pageNumber = 10;
-    private Integer pageSize = 0;
-    private String nameEquals;
-    private BigDecimal priceGreaterThan;
+public class ProductWithStockModel {
+    private Long id;
+    private String name;
+    private BigDecimal price;
+    private ProductStatus status;
+    private Integer stock;
 }
